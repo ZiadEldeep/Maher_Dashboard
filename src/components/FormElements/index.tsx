@@ -5,7 +5,7 @@ import Breadcrumb from "@/components/Breadcrumbs/Breadcrumb";
 
 const FormElements = () => {
   const [formData, setFormData] = useState({
-    userId: "6788077580865c65ee876ab3",
+    userId: "", // Default user ID, you can change this or make it dynamic
     brand: "",
     model: "",
     color: "",
@@ -43,6 +43,20 @@ const FormElements = () => {
       <div className="max-w-3xl mx-auto p-6 bg-white rounded shadow-md dark:bg-boxdark">
         <h3 className="text-lg font-medium text-black dark:text-white mb-4">Add Car</h3>
         <form onSubmit={handleSubmit} className="space-y-4">
+          {/* User ID */}
+          <div>
+            <label className="block text-sm font-medium text-black dark:text-white">User ID</label>
+            <input
+              type="text"
+              name="userId"
+              value={formData.userId}
+              onChange={handleChange}
+              placeholder="Enter user ID"
+              required
+              className="w-full rounded-lg border border-stroke p-3 dark:border-strokedark dark:bg-form-input dark:text-white"
+            />
+          </div>
+
           {/* Brand */}
           <div>
             <label className="block text-sm font-medium text-black dark:text-white">Brand</label>
@@ -163,17 +177,13 @@ const FormElements = () => {
           <div>
             <label className="block text-sm font-medium text-black dark:text-white">Estmara</label>
             <input
-            type="text"
+              type="text"
               name="estmara"
               value={formData.estmara}
               onChange={handleChange}
               required
               className="w-full rounded-lg border border-stroke p-3 dark:border-strokedark dark:bg-form-input dark:text-white"
-            >
-              {/* <option value="">Select estmara status</option>
-              <option value="Valid">Valid</option>
-              <option value="Expired">Expired</option> */}
-            </input>
+            />
           </div>
 
           <button
