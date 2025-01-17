@@ -50,11 +50,14 @@ export default function CarList() {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {cars.map((car) => (
           <div key={car.id} className="border p-4 rounded shadow">
-            <img
-              src={car.image}
-              alt={`${car.brand} ${car.model}`}
-              className="w-full h-40 object-cover mb-4"
-            />
+            <Image
+  src={car.image || '/placeholder-icon.png'}
+  alt={`${car.brand} ${car.model}`}
+  className="w-full h-40 object-cover mb-4"
+  width={300}
+  height={160}
+/>
+
             <h2 className="text-xl font-semibold">{car.brand} {car.model}</h2>
             <p>Color: {car.color}</p>
             <p>Fuel Type: {car.fuelType}</p>
