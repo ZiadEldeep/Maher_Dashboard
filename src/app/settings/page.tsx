@@ -22,20 +22,23 @@ const Settings = () => {
 
     try {
       const response = await fetch(`https://maher-api1.up.railway.app/updateUser/${id}`, {
-        method: "PUT",
+        method: "PUT", // Ensure it's the correct method (PUT or PATCH)
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
 
       if (!response.ok) {
-        throw new Error(`Failed to update user. Status: ${response.status}`);
+        // Check if the response is not OK and handle the error
+        const errorData = await response.json();
+        console.error("Error data:", errorData);
+        throw new Error(`Failed to update user. ${errorData.message || response.statusText}`);
       }
 
       const result = await response.json();
-      console.log(result);
+      console.log("User updated:", result);
       alert("User updated successfully!");
     } catch (error) {
-      console.error(error);
+      console.error("Error updating user:", error);
       alert("Failed to update user. Please try again.");
     }
   };
@@ -45,17 +48,12 @@ const Settings = () => {
       <div className="flex h-screen items-center justify-center bg-gray-100">
         <div className="w-full max-w-md rounded border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
           <div className="border-b border-stroke px-7 py-4 dark:border-strokedark">
-            <h3 className="font-medium text-black dark:text-white">
-              Update User Information
-            </h3>
+            <h3 className="font-medium text-black dark:text-white">Update User Information</h3>
           </div>
           <div className="p-7">
             <form onSubmit={handleSubmit}>
               <div className="mb-5.5">
-                <label
-                  className="mb-3 block text-sm font-medium text-black dark:text-white"
-                  htmlFor="userId"
-                >
+                <label className="mb-3 block text-sm font-medium text-black dark:text-white" htmlFor="userId">
                   User ID
                 </label>
                 <input
@@ -70,10 +68,7 @@ const Settings = () => {
 
               <div className="mb-5.5 flex flex-col gap-5.5 sm:flex-row">
                 <div className="w-full sm:w-1/2">
-                  <label
-                    className="mb-3 block text-sm font-medium text-black dark:text-white"
-                    htmlFor="fullName"
-                  >
+                  <label className="mb-3 block text-sm font-medium text-black dark:text-white" htmlFor="fullName">
                     Full Name
                   </label>
                   <input
@@ -86,10 +81,7 @@ const Settings = () => {
                 </div>
 
                 <div className="w-full sm:w-1/2">
-                  <label
-                    className="mb-3 block text-sm font-medium text-black dark:text-white"
-                    htmlFor="phoneNumber"
-                  >
+                  <label className="mb-3 block text-sm font-medium text-black dark:text-white" htmlFor="phoneNumber">
                     Phone Number
                   </label>
                   <input
@@ -103,10 +95,7 @@ const Settings = () => {
               </div>
 
               <div className="mb-5.5">
-                <label
-                  className="mb-3 block text-sm font-medium text-black dark:text-white"
-                  htmlFor="emailAddress"
-                >
+                <label className="mb-3 block text-sm font-medium text-black dark:text-white" htmlFor="emailAddress">
                   Email Address
                 </label>
                 <input
